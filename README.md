@@ -9,6 +9,7 @@
 - 💾 **可选数据持久化**（`--store true`）
 - 📱 **移动端全面优化**（虚拟键盘、全屏终端、触摸复制）
 - 🔑 支持密码和私钥两种 SSH 认证方式
+- 🔗 **URL 参数支持** - 通过 URL 传递连接参数，实现快速连接
 
 ---
 
@@ -37,6 +38,77 @@
 
 # 全功能（认证 + 存储 + 自定义端口）
 ./webssh --auth true --store true --port 8080
+```
+
+---
+
+## URL 参数
+
+支持通过 URL 传递参数，实现快速连接和自定义终端。
+
+### 连接参数
+
+```bash
+# 基本连接参数（密码需 base64 编码）
+http://localhost:8888/?hostname=192.168.1.100&username=root&password=dGVzdDEyMw==
+
+# 指定端口
+http://localhost:8888/?hostname=example.com&username=admin&password=cGFzc3dvcmQ%3D&port=2222
+```
+
+### 终端外观参数
+
+```bash
+# 终端背景色（使用 hash 参数）
+http://localhost:8888/#bgcolor=green
+
+# 字体颜色
+http://localhost:8888/#fontcolor=red
+
+# 自定义标题
+http://localhost:8888/?title=my-ssh-server
+
+# 字体大小
+http://localhost:8888/#fontsize=24
+```
+
+### 功能参数
+
+```bash
+# 编码设置
+http://localhost:8888/#encoding=gbk
+
+# 终端类型
+http://localhost:8888/?term=xterm-256color
+
+# 登录后执行命令
+http://localhost:8888/?command=pwd
+```
+
+### 参数说明
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| `hostname` | 查询参数 | SSH 服务器地址 |
+| `username` | 查询参数 | SSH 用户名（默认 root） |
+| `password` | 查询参数 | SSH 密码（需 base64 编码） |
+| `port` | 查询参数 | SSH 端口（默认 22） |
+| `title` | 查询参数 | 自定义页面标题 |
+| `command` | 查询参数 | 连接后执行的命令 |
+| `term` | 查询参数 | 终端类型（如 xterm-256color） |
+| `bgcolor` | hash 参数 | 终端背景色 |
+| `fontcolor` | hash 参数 | 字体颜色 |
+| `fontsize` | hash 参数 | 字体大小（像素） |
+| `encoding` | hash 参数 | 字符编码（如 gbk、utf-8） |
+
+### 示例组合
+
+```bash
+# 完整示例：连接服务器并执行命令
+http://localhost:8888/?hostname=192.168.1.100&username=root&password=dGVzdDEyMw==&command=top
+
+# 自定义外观
+http://localhost:8888/?hostname=example.com&username=admin&password=secret&title=生产服务器#bgcolor=dark&fontsize=16
 ```
 
 ---

@@ -16,8 +16,8 @@ import (
 	"github.com/gorilla/websocket"
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/yourusername/webssh/internal/store"
-	sshtunnel "github.com/yourusername/webssh/internal/ssh"
+	"github.com/springsunx/webssh/internal/store"
+	sshtunnel "github.com/springsunx/webssh/internal/ssh"
 )
 
 // AppConfig holds runtime feature flags
@@ -248,6 +248,9 @@ func Register(mux *http.ServeMux, cfg AppConfig) {
 	if cfg.AuthEnabled {
 		loadSessionsFromDisk()
 	}
+
+	// 嵌入式静态文件服务（xterm.js 等资源已编译进二进制）
+	mux.Handle("/static/", staticFileHandler())
 
 	mux.HandleFunc("/setup", h.setupHandler)
 	mux.HandleFunc("/login", h.loginHandler)
@@ -547,17 +550,18 @@ func (a *appHandler) trustHostAPIHandler(w http.ResponseWriter, r *http.Request)
 // ---- WebSocket ----
 
 type Message struct {
-	Type       string `json:"type"`
-	Data       string `json:"data,omitempty"`
-	Host       string `json:"host,omitempty"`
-	Port       int    `json:"port,omitempty"`
-	Username   string `json:"username,omitempty"`
-	Password   string `json:"password,omitempty"`
-	PrivateKey string `json:"private_key,omitempty"`
-	Passphrase string `json:"passphrase,omitempty"`
-	Rows       uint32 `json:"rows,omitempty"`
-	Cols       uint32 `json:"cols,omitempty"`
-	ProfileID  string `json:"profile_id,omitempty"` // 通过 ID 使用已存储凭证
+	Type         string `json:"type"`
+	Data         string `json:"data,omitempty"`
+	Host         string `json:"host,omitempty"`
+	Port         int    `json:"port,omitempty"`
+	Username     string `json:"username,omitempty"`
+	Password     string `json:"password,omitempty"`
+	PrivateKey   string `json:"private_key,omitempty"`
+	Passphrase   string `json:"passphrase,omitempty"`
+	Rows         uint32 `json:"rows,omitempty"`
+	Cols         uint32 `json:"cols,omitempty"`
+	ProfileID    string `json:"profile_id,omitempty"`    // 通过 ID 使用已存储凭证
+	TerminalType string `json:"terminal_type,omitempty"` // 终端类型，如 xterm-256color
 }
 
 type wsConn struct {
@@ -610,12 +614,13 @@ func (a *appHandler) wsHandler(w http.ResponseWriter, r *http.Request) {
 		for _, p := range profiles {
 			if p.ID == msg.ProfileID {
 				sshCfg = sshtunnel.Config{
-					Host:       p.Host,
-					Port:       p.Port,
-					Username:   p.Username,
-					Password:   p.Password,
-					PrivateKey: []byte(p.PrivateKey),
-					Passphrase: []byte(p.Passphrase),
+					Host:         p.Host,
+					Port:         p.Port,
+					Username:     p.Username,
+					Password:     p.Password,
+					PrivateKey:   []byte(p.PrivateKey),
+					Passphrase:   []byte(p.Passphrase),
+					TerminalType: msg.TerminalType,
 				}
 				found = true
 				break
@@ -628,12 +633,13 @@ func (a *appHandler) wsHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		// 直接传入凭证模式（临时连接）
 		sshCfg = sshtunnel.Config{
-			Host:       msg.Host,
-			Port:       msg.Port,
-			Username:   msg.Username,
-			Password:   msg.Password,
-			PrivateKey: []byte(msg.PrivateKey),
-			Passphrase: []byte(msg.Passphrase),
+			Host:         msg.Host,
+			Port:         msg.Port,
+			Username:     msg.Username,
+			Password:     msg.Password,
+			PrivateKey:   []byte(msg.PrivateKey),
+			Passphrase:   []byte(msg.Passphrase),
+			TerminalType: msg.TerminalType,
 		}
 	}
 

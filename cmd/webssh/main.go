@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/yourusername/webssh/internal/handler"
-	sshtunnel "github.com/yourusername/webssh/internal/ssh"
-	"github.com/yourusername/webssh/internal/store"
+	"github.com/springsunx/webssh/internal/handler"
+	sshtunnel "github.com/springsunx/webssh/internal/ssh"
+	"github.com/springsunx/webssh/internal/store"
 )
 
 func main() {
