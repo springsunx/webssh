@@ -1,0 +1,42 @@
+# Git
+.git
+.github
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+webssh
+webssh-test
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test files
+*.test
+*.out
+
+# Runtime data
+data/
+
+# Documentation
+README.md
+LICENSE
+
+# Docker files (avoid recursive builds)
+Dockerfile
+docker-compose.yml
+
+# Go module cache
+vendor/

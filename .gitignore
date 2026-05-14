@@ -1,0 +1,31 @@
+# 二进制文件
+webssh
+webssh-test
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# 测试文件
+*.test
+
+# 输出文件
+*.out
+
+# 依赖目录
+vendor/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 运行时目录
+data/

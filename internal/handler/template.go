@@ -222,6 +222,7 @@ const indexHTMLTemplate = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
   <title>WebSSH Console</title>
@@ -231,7 +232,7 @@ const indexHTMLTemplate = `<!DOCTYPE html>
   <link rel="apple-touch-icon" sizes="192x192" href="data:image/png;base64,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">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700;800&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css"/>
+  <link rel="stylesheet" href="/static/xterm/xterm.css" onerror="this.href='https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css'"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     :root{
@@ -459,23 +460,26 @@ const indexHTMLTemplate = `<!DOCTYPE html>
     #term-window{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);
       backdrop-filter:blur(9px);align-items:center;justify-content:center;
       /* 修复：禁止弹窗层面的触摸弹跳/滚动 */
-      overscroll-behavior:none;touch-action:none;}
+      overscroll-behavior:none;}
     #term-window.open{display:flex;animation:fadeIn .3s ease both;}
+    /* 全屏终端模式：所有连接都全屏显示，无弹窗 */
+    #term-window{background:transparent;backdrop-filter:none;touch-action:auto;}
+    #term-window .term-popup{width:100%;max-width:100%;height:100%;max-height:100%;
+      border-radius:0;border:none;box-shadow:none;animation:none;overflow:visible;}
+    #term-window .term-titlebar{display:none;}
     /* 桌面端弹窗 */
     .term-popup{width:calc(100vw - 32px);max-width:980px;height:calc(100vh - 60px);max-height:700px;
       background:#0d1117;border-radius:12px;border:1px solid #1e2d45;overflow:hidden;
       display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.65);
       animation:popIn .3s cubic-bezier(.22,1,.36,1) both;}
     @keyframes popIn{from{transform:scale(.93) translateY(20px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
-    /* 移动端：高度由JS动态设置为window.innerHeight，绕过浏览器地址栏偏差 */
+    /* 移动端：全屏终端 */
     @media(max-width:640px){
       #term-window{align-items:stretch;padding:0;}
-      .term-popup{
+      #term-window .term-popup{
         width:100%;max-width:100%;
-        height:100%; /* fallback，JS会覆盖 */
-        max-height:none;border-radius:0;border:none;
-        animation:slideUp .3s cubic-bezier(.22,1,.36,1) both;}
-      @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+        height:100%;max-height:100%;
+        border-radius:0;border:none;box-shadow:none;animation:none;}
     }
     .term-titlebar{display:flex;align-items:center;padding:8px 12px;background:#111827;border-bottom:1px solid #1e2d45;gap:8px;flex-shrink:0;}
     .term-status-dot{width:9px;height:9px;border-radius:50%;background:#28c840;flex-shrink:0;animation:pulse 2.5s ease-in-out infinite;}
@@ -485,25 +489,30 @@ const indexHTMLTemplate = `<!DOCTYPE html>
       font-size:.68rem;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;}
     .btn-disc:hover{background:#ef4444;color:#fff;}
     /* 修复：终端区域允许触摸纵向滚动，阻止冒泡给弹窗 */
-    #terminal{flex:1;overflow:hidden;padding:3px;touch-action:pan-y;overscroll-behavior:contain;
+    #terminal{flex:1;overflow:hidden;padding:3px;touch-action:pan-x pan-y;overscroll-behavior:contain;
       /* 禁止移动端原生文本选择和长按弹出复制菜单 */
       user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+    /* 手机端终端横向滚动，不换行 */
+    @media(max-width:640px){
+      #terminal{overflow-x:scroll!important;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
+      #terminal .xterm{min-width:max-content;}
+      #terminal .xterm-viewport{overflow-x:scroll!important;overflow-y:hidden!important;}
+    }
 
     /* ---- VIRTUAL KEYBOARD（修复：多行显示，不再横向滚动） ---- */
     .vkb{display:none;flex-shrink:0;background:#1a2236;border-top:1px solid #1e2d45;
-      padding:5px 6px;gap:4px;
-      /* 修复：换行替代横滑 */
-      flex-wrap:wrap;
+      padding:5px 6px;gap:4px;flex-direction:column;
       padding-bottom:calc(5px + env(safe-area-inset-bottom,0px));}
     .vkb.show{display:flex;}
-    .vkb-btn{
-      /* 修复：自适应宽度，约8个一行，多则自动折行 */
-      flex:1 1 calc(12.5% - 4px);min-width:44px;max-width:72px;
+    .vkb-row{display:flex;gap:4px;}
+    .vkb-btn{flex:1 1 0;min-width:44px;
       padding:8px 4px;background:#0d1117;border:1px solid #2d3f5a;
       border-radius:6px;color:#94a3b8;font-family:var(--font-mono);font-size:.72rem;
       cursor:pointer;transition:all .15s;user-select:none;-webkit-user-select:none;
       -webkit-tap-highlight-color:transparent;touch-action:manipulation;
       text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .vkb-btn.primary{background:#ec4899;color:#fff;border-color:#ec4899;font-weight:600;}
+    .vkb-btn.danger{background:#b91c1c;color:#fee2e2;border-color:#ef4444;font-weight:600;}
     .vkb-btn:active{background:rgba(168,85,247,0.2);color:#c084fc;border-color:#a855f7;}
     .vkb-btn.ctrl-active{background:rgba(168,85,247,0.25);color:#c084fc;border-color:#a855f7;box-shadow:0 0 0 2px rgba(168,85,247,0.4);}
 
@@ -624,21 +633,28 @@ const indexHTMLTemplate = `<!DOCTYPE html>
         <label><span data-i18n="label_host">主机地址</span> <span class="req">*</span></label>
         <div class="input-wrap">
           <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <input type="text" id="host" placeholder="192.168.1.1 或 example.com" data-i18n-ph="ph_host"/>
+          <input type="text" id="host" placeholder="192.168.1.1 或 example.com" data-i18n-ph="ph_host" onkeydown="if(event.key==='Enter'){event.preventDefault();connect();}"/>
         </div>
       </div>
       <div class="field">
         <label data-i18n="label_port">端口</label>
         <div class="input-wrap">
           <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          <input type="number" id="port" value="22" min="1" max="65535"/>
+          <input type="number" id="port" value="22" min="1" max="65535" onkeydown="if(event.key==='Enter'){event.preventDefault();connect();}"/>
         </div>
       </div>
-      <div class="field full">
+      <div class="field">
         <label data-i18n="label_user">用户名</label>
         <div class="input-wrap">
           <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <input type="text" id="username" placeholder="root（默认）" data-i18n-ph="ph_user"/>
+          <input type="text" id="username" placeholder="root（默认）" data-i18n-ph="ph_user" onkeydown="if(event.key==='Enter'){event.preventDefault();connect();}"/>
+        </div>
+      </div>
+      <div class="field">
+        <label data-i18n="label_title">标题</label>
+        <div class="input-wrap">
+          <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+          <input type="text" id="conn-title" placeholder="连接备注（可选）" data-i18n-ph="ph_title" onkeydown="if(event.key==='Enter'){event.preventDefault();connect();}"/>
         </div>
       </div>
 
@@ -654,7 +670,7 @@ const indexHTMLTemplate = `<!DOCTYPE html>
           <label data-i18n="label_password">密码</label>
           <div class="input-wrap">
             <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <input type="password" id="password" placeholder="请输入密码" data-i18n-ph="ph_password" oninput="if(selectedProfileId){selectedProfileId=null;this.placeholder=t('ph_password');}"/>
+            <input type="password" id="password" placeholder="请输入密码" data-i18n-ph="ph_password" oninput="if(selectedProfileId){selectedProfileId=null;this.placeholder=t('ph_password');}" onkeydown="if(event.key==='Enter'){event.preventDefault();connect();}"/>
           </div>
         </div>
       </div>
@@ -714,19 +730,40 @@ const indexHTMLTemplate = `<!DOCTYPE html>
     </div>
     <div id="terminal"></div>
     <div class="vkb" id="vkb">
-      <button class="vkb-btn" ontouchend="e(event);sendKey('-')" onclick="sendKey('-')">-</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('/')" onclick="sendKey('/')">/</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('_')" onclick="sendKey('_')">_</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('~')" onclick="sendKey('~')">~</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('=')" onclick="sendKey('=')">=</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('\\')" onclick="sendKey('\\')">\</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('|')" onclick="sendKey('|')">|</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[A')" onclick="sendKey('\x1b[A')">↑</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[B')" onclick="sendKey('\x1b[B')">↓</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[D')" onclick="sendKey('\x1b[D')">←</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[C')" onclick="sendKey('\x1b[C')">→</button>
-      <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b')" onclick="sendKey('\x1b')">ESC</button>
-      <button class="vkb-btn" id="ctrl-btn" ontouchend="e(event);toggleCtrl()" onclick="toggleCtrl()">Ctrl</button>
+      <div class="vkb-row">
+        <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b')" onclick="sendKey('\x1b')">Esc</button>
+        <button class="vkb-btn" onclick="vkbCopy()">Copy</button>
+        <button class="vkb-btn" onclick="vkbPaste()">Paste</button>
+        <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[H')" onclick="sendKey('\x1b[H')">Home</button>
+        <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[F')" onclick="sendKey('\x1b[F')">End</button>
+        <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[A')" onclick="sendKey('\x1b[A')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 15 12 9 18 15"/>
+          </svg>
+        </button>
+        <button class="vkb-btn primary" onclick="sendEnter()">Enter</button>
+      </div>
+      <div class="vkb-row">
+        <button class="vkb-btn" id="ctrl-btn" ontouchend="e(event);toggleCtrl()" onclick="toggleCtrl()">Ctrl</button>
+        <button class="vkb-btn" onclick="sendKey('\x1b[1;2z')">Shift</button>
+        <button class="vkb-btn" onclick="sendKey('\t')">Tab</button>
+        <button class="vkb-btn danger" onclick="sendCtrl('c')">^C</button>
+        <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[D')" onclick="sendKey('\x1b[D')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 6 9 12 15 18"/>
+          </svg>
+        </button>
+        <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[B')" onclick="sendKey('\x1b[B')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <button class="vkb-btn" ontouchend="e(event);sendKey('\x1b[C')" onclick="sendKey('\x1b[C')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 6 15 12 9 18"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -908,8 +945,8 @@ const indexHTMLTemplate = `<!DOCTYPE html>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
+<script src="/static/xterm/xterm.js" onerror="this.src='https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js'"></script>
+<script src="/static/xterm/xterm-addon-fit.js" onerror="this.src='https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js'"></script>
 <script>
 // ---- Config injected from server ----
 const STORE_ENABLED = {{if .StoreEnabled}}true{{else}}false{{end}};
@@ -936,8 +973,8 @@ const i18n = {
     pill_ready: '就绪', pill_enc: '加密传输',
     // form labels / placeholders
     label_name: '主机名（备注）', ph_name: '给这个连接起个名字（可选）',
-    label_host: '主机地址', label_port: '端口', label_user: '用户名',
-    ph_host: '192.168.1.1 或 example.com', ph_user: 'root（默认）',
+    label_host: '主机地址', label_port: '端口', label_user: '用户名', label_title: '标题',
+    ph_host: '192.168.1.1 或 example.com', ph_user: 'root（默认）', ph_title: '连接备注（可选）',
     tab_password: '密码登录', tab_key: '私钥登录',
     label_password: '密码', ph_password: '请输入密码',
     label_keyfile: '私钥文件', btn_choose_file: '选择文件', no_key_file: '未选择私钥文件',
@@ -983,8 +1020,8 @@ const i18n = {
     pill_ready: 'Ready', pill_enc: 'Encrypted',
     // form labels / placeholders
     label_name: 'Profile Name', ph_name: 'Give this connection a name (optional)',
-    label_host: 'Host', label_port: 'Port', label_user: 'Username',
-    ph_host: '192.168.1.1 or example.com', ph_user: 'root (default)',
+    label_host: 'Host', label_port: 'Port', label_user: 'Username', label_title: 'Title',
+    ph_host: '192.168.1.1 or example.com', ph_user: 'root (default)', ph_title: 'Connection title (optional)',
     tab_password: 'Password', tab_key: 'Private Key',
     label_password: 'Password', ph_password: 'Enter password',
     label_keyfile: 'Private Key File', btn_choose_file: 'Choose File', no_key_file: 'No key file selected',
@@ -1120,7 +1157,7 @@ function setUIFont(font) {
 }
 function setTermFont(font) {
   currentTermFont = font;
-  if (term) { term.options.fontFamily = font; fitAddon && setTimeout(()=>fitAddon.fit(),60); }
+  if (term) { term.options.fontFamily = font; if (!isMobile() && fitAddon) setTimeout(()=>fitAddon.fit(),60); }
   saveSettings({ term_font: font });
 }
 function setTermBg(bg, el) {
@@ -1137,7 +1174,7 @@ function setFontSize(size, el) {
   currentFontSize = size;
   document.querySelectorAll('.font-size-btn').forEach(b => b.classList.remove('active'));
   if (el) el.classList.add('active');
-  if (term) { term.options.fontSize = size; fitAddon && setTimeout(()=>fitAddon.fit(),60); }
+  if (term) { term.options.fontSize = size; if (!isMobile() && fitAddon) setTimeout(()=>fitAddon.fit(),60); }
   saveSettings({ font_size: size });
 }
 function setLang(lang, btn) {
@@ -1380,6 +1417,37 @@ function sendKey(k) {
 }
 function sendCtrl(c) { sendKey(String.fromCharCode(c.charCodeAt(0) - 96)); }
 
+// 虚拟键盘：复制
+function vkbCopy() {
+  const sel = term ? term.getSelection() : '';
+  if (sel && navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(sel).then(() => {
+      showToast('✓ 已复制');
+    }).catch(() => {});
+  } else {
+    showToast('⚠ 无可复制内容');
+  }
+}
+// 虚拟键盘：粘贴
+function vkbPaste() {
+  if (navigator.clipboard && navigator.clipboard.readText) {
+    navigator.clipboard.readText().then(text => {
+      if (text) sendKey(text);
+    }).catch(() => {
+      showToast('⚠ 无法读取剪贴板');
+    });
+  } else {
+    showToast('⚠ 浏览器不支持剪贴板（需HTTPS）');
+  }
+}
+function sendEnter() {
+  sendKey('\n');
+}
+// 虚拟键盘：语音/麦克风占位
+function vkbMic() {
+  showToast('语音输入暂未实现');
+}
+
 // ---- Ctrl 粘滞键 ----
 let ctrlSticky = false;
 function toggleCtrl() {
@@ -1420,7 +1488,11 @@ function initTerm() {
   if (term) term.dispose();
   document.getElementById('terminal').innerHTML = '';
   const mobile = isMobile();
-  const theme = TERM_THEMES[currentTermBg] || TERM_THEMES.dark;
+  const theme = Object.assign({}, TERM_THEMES[currentTermBg] || TERM_THEMES.dark);
+  // 应用URL参数中的字体颜色
+  if (settingsCache.font_color) {
+    theme.foreground = settingsCache.font_color;
+  }
   // 同步弹窗背景色
   const popup = document.querySelector('.term-popup');
   if (popup) popup.style.background = theme.background;
@@ -1428,7 +1500,7 @@ function initTerm() {
     theme,
     fontFamily: currentTermFont,
     fontSize: currentFontSize || (mobile ? 13 : 14),
-    lineHeight: 1.5,
+    lineHeight: 1.0,
     cursorBlink: true,
     cursorStyle: 'bar',
     scrollback: 5000,
@@ -1438,7 +1510,12 @@ function initTerm() {
   fitAddon = new FitAddon.FitAddon();
   term.loadAddon(fitAddon);
   term.open(document.getElementById('terminal'));
-  setTimeout(() => fitAddon.fit(), 80);
+  // 手机端不强制适配宽度，允许横向滚动
+  if (mobile) {
+    term.resize(120, term.rows || 24);
+  } else {
+    setTimeout(() => fitAddon.fit(), 80);
+  }
   term.onData(data => {
     // Ctrl 粘滞键：若处于激活状态，拦截下一个字母并转为 Ctrl+字母
     if (ctrlSticky && applyCtrlIfSticky(data)) return;
@@ -1450,11 +1527,42 @@ function initTerm() {
       if (sel) navigator.clipboard.writeText(sel).catch(() => {});
     });
   }
+  // 右键菜单：选中文本时复制，未选中时粘贴（常用终端逻辑）
+  const termContainer = document.getElementById('terminal');
+  if (termContainer) {
+    termContainer.addEventListener('contextmenu', ev => {
+      ev.preventDefault();
+      const selection = term.getSelection();
+      if (selection && selection.length > 0) {
+        // 有选中文本 → 复制到剪贴板
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(selection).then(() => {
+            showToast('✓ 已复制');
+          }).catch(() => {});
+        }
+      } else {
+        // 未选中文本 → 从剪贴板粘贴
+        if (navigator.clipboard && navigator.clipboard.readText) {
+          navigator.clipboard.readText().then(text => {
+            if (text && ws && ws.readyState === WebSocket.OPEN) {
+              ws.send(JSON.stringify({type:'input', data: text}));
+              showToast('✓ 已粘贴');
+            }
+          }).catch(() => {
+            showToast('⚠ 无法读取剪贴板');
+          });
+        } else {
+          showToast('⚠ 浏览器不支持剪贴板API（需HTTPS）');
+        }
+      }
+    });
+  }
 }
 
 window.addEventListener('resize', () => {
   setTermPopupHeight();
-  if (fitAddon) setTimeout(() => {
+  // 手机端不使用fit addon，保持120列宽度
+  if (!isMobile() && fitAddon) setTimeout(() => {
     fitAddon.fit();
     if (term && ws && ws.readyState === WebSocket.OPEN)
       ws.send(JSON.stringify({type:'resize',rows:term.rows,cols:term.cols}));
@@ -1473,7 +1581,11 @@ function setTermPopupHeight() {
 function openTermWindow(label) {
   document.getElementById('term-title').textContent = label;
   document.getElementById('term-window').classList.add('open');
-  // 修复弹窗弹跳：锁定 body 滚动
+  // 全屏模式：隐藏页面其他内容
+  document.querySelector('.page').style.display = 'none';
+  document.querySelector('.topbar').style.display = 'none';
+  document.querySelector('.bg-mesh').style.display = 'none';
+  // 锁定 body 滚动
   document.body.style.overflow = 'hidden';
   document.body.style.position = 'fixed';
   document.body.style.width = '100%';
@@ -1516,6 +1628,11 @@ function openTermWindow(label) {
         ev.stopPropagation();
         vp.scrollTop += delta;
       }
+      // 手机端：横向滑动时允许默认行为（横向滚动），纵向滑动时阻止
+      if (isMobile() && dx > dy) {
+        // 横向滑动，不阻止默认行为
+        return;
+      }
       ev.preventDefault();
     }, {passive: false});
 
@@ -1528,7 +1645,8 @@ function openTermWindow(label) {
     }, {passive: true});
   }
   setTimeout(() => {
-    fitAddon && fitAddon.fit();
+    // 手机端不使用fit addon
+    if (!isMobile() && fitAddon) fitAddon.fit();
     term && term.focus();
     if (ws && ws.readyState === WebSocket.OPEN && term)
       ws.send(JSON.stringify({type:'resize',rows:term.rows,cols:term.cols}));
@@ -1537,6 +1655,10 @@ function openTermWindow(label) {
 function closeTermWindow() {
   document.getElementById('term-window').classList.remove('open');
   document.getElementById('vkb').classList.remove('show');
+  // 恢复页面显示
+  document.querySelector('.page').style.display = '';
+  document.querySelector('.topbar').style.display = '';
+  document.querySelector('.bg-mesh').style.display = '';
   // 恢复 body 滚动
   document.body.style.overflow = '';
   document.body.style.position = '';
@@ -1673,7 +1795,7 @@ function connect() {
   let connectMsg;
   if (selectedProfileId) {
     // 已选择保存的 profile：只传 profile_id，凭证由服务端从存储取
-    connectMsg = { type: 'connect', profile_id: selectedProfileId };
+    connectMsg = { type: 'connect', profile_id: selectedProfileId, terminal_type: window._urlTermType || '' };
   } else {
     // 手动填写模式
     const password = currentTab === 'password' ? document.getElementById('password').value : '';
@@ -1686,7 +1808,7 @@ function connect() {
       ws.close(); ws = null;
       return;
     }
-    connectMsg = { type: 'connect', host, port, username, password, private_key, passphrase };
+    connectMsg = { type: 'connect', host, port, username, password, private_key, passphrase, terminal_type: window._urlTermType || '' };
   }
 
   ws.onopen = () => ws.send(JSON.stringify(connectMsg));
@@ -1698,6 +1820,48 @@ function connect() {
       showToast('✓ ' + t('connected') + ': ' + label);
       initTerm();
       openTermWindow(label);
+      
+      // 更新地址栏：保留原有参数，只更新连接参数
+      if (host) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('hostname', host);
+        url.searchParams.set('port', port || '22');
+        url.searchParams.set('username', username || 'root');
+        // 标题参数
+        const titleVal = document.getElementById('conn-title').value;
+        if (titleVal) {
+          url.searchParams.set('title', titleVal);
+        } else {
+          url.searchParams.delete('title');
+        }
+        // 直接从DOM获取密码值
+        const pwVal = document.getElementById('password').value;
+        if (pwVal) {
+          try {
+            // URL安全的base64编码
+            const b64 = btoa(unescape(encodeURIComponent(pwVal)))
+              .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+            url.searchParams.set('password', b64);
+          } catch(e) {}
+        }
+        window.history.replaceState({}, '', url.toString());
+      }
+      
+      // 处理URL参数中的命令
+      if (window._urlCommand) {
+        // 发送命令
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({type:'input', data: window._urlCommand + '\n'}));
+        }
+      }
+      
+      // 处理URL参数中的编码（如果xterm支持）
+      // 注意：xterm.js本身不支持setEncoding，编码可能需要在后端处理
+      // 这里可以存储编码参数，供其他功能使用
+      if (window._urlEncoding) {
+        // 暂时只存储，不实际设置
+        window._currentEncoding = window._urlEncoding;
+      }
     } else if (msg.type === 'output') {
       if (term) term.write(msg.data);
     } else if (msg.type === 'error') {
@@ -1727,8 +1891,148 @@ function disconnect() {
   showToast('⊗ ' + t('disconnected'));
 }
 
+// ---- URL Parameters ----
+function parseURLParams() {
+  const params = {};
+  // 解析查询参数 (?key=value)
+  const searchParams = new URLSearchParams(window.location.search);
+  for (const [key, value] of searchParams.entries()) {
+    params[key] = value;
+  }
+  // 解析hash参数 (#key=value)
+  const hash = window.location.hash;
+  if (hash && hash.includes('=')) {
+    const hashParams = hash.substring(1).split('&');
+    for (const param of hashParams) {
+      const [key, value] = param.split('=');
+      if (key && value !== undefined) {
+        params[key] = value;
+      }
+    }
+  }
+  return params;
+}
+
+function applyURLParams() {
+  const params = parseURLParams();
+  
+  // 连接参数
+  if (params.hostname) {
+    const hostEl = document.getElementById('host');
+    if (hostEl) hostEl.value = params.hostname;
+  }
+  if (params.port) {
+    const portEl = document.getElementById('port');
+    if (portEl) portEl.value = params.port;
+  }
+  if (params.username) {
+    const userEl = document.getElementById('username');
+    if (userEl) userEl.value = params.username;
+  }
+  if (params.password) {
+    // 密码是URL安全的base64编码，需要解码
+    try {
+      // 还原URL安全base64：替换特殊字符，添加填充
+      let b64 = params.password.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
+      const decoded = decodeURIComponent(escape(atob(b64)));
+      const pwEl = document.getElementById('password');
+      if (pwEl) {
+        pwEl.value = decoded;
+        // 切换到密码认证tab
+        document.querySelectorAll('.auth-tab').forEach(b => {
+          b.classList.toggle('active', b.dataset.tab === 'password');
+        });
+        document.querySelectorAll('.auth-pane').forEach(pane => {
+          pane.classList.toggle('active', pane.id === 'pane-password');
+        });
+        currentTab = 'password';
+      }
+    } catch (e) {
+      // 解码失败，忽略
+    }
+  }
+  
+  // 终端背景色
+  if (params.bgcolor) {
+    // 映射颜色名称到主题名称
+    const colorMap = {
+      'green': 'forest',
+      'dark': 'dark',
+      'light': 'light',
+      'blue': 'blue-white',
+      'purple': 'purple-pink'
+    };
+    const theme = colorMap[params.bgcolor] || params.bgcolor;
+    document.body.setAttribute('data-theme', theme);
+    saveSettings({ theme });
+  }
+  
+  // 字体颜色
+  if (params.fontcolor) {
+    // 应用到终端主题的前景色
+    if (TERM_THEMES[currentTermBg]) {
+      TERM_THEMES[currentTermBg].foreground = params.fontcolor;
+      if (term) term.options.theme = TERM_THEMES[currentTermBg];
+    }
+    saveSettings({ font_color: params.fontcolor });
+  }
+  
+  // 自定义标题
+  if (params.title) {
+    document.title = params.title;
+    const headerH1 = document.querySelector('.header h1');
+    if (headerH1) headerH1.textContent = params.title;
+    // 填充标题输入框
+    const titleEl = document.getElementById('conn-title');
+    if (titleEl) titleEl.value = params.title;
+  }
+  
+  // 编码
+  if (params.encoding) {
+    // 编码参数可能需要在连接时设置
+    // 存储到全局变量，在连接时使用
+    window._urlEncoding = params.encoding;
+  }
+  
+  // 命令
+  if (params.command) {
+    // 存储到全局变量，在连接成功后执行
+    window._urlCommand = params.command;
+  }
+  
+  // 字体大小
+  if (params.fontsize) {
+    const size = parseInt(params.fontsize);
+    if (size > 0) {
+      currentFontSize = size;
+      if (term) {
+        term.options.fontSize = size;
+        if (!isMobile() && fitAddon) setTimeout(() => fitAddon.fit(), 60);
+      }
+      saveSettings({ font_size: size });
+    }
+  }
+  
+  // 终端类型
+  if (params.term) {
+    window._urlTermType = params.term;
+  }
+  
+  // 自动连接：当hostname和password都存在时，自动触发连接
+  if (params.hostname && params.password) {
+    setTimeout(() => {
+      const connectBtn = document.getElementById('btn-connect');
+      if (connectBtn && !connectBtn.disabled) {
+        connect();
+      }
+    }, 300); // 延迟300ms确保DOM和设置都已就绪
+  }
+}
+
 // ---- Init ----
 loadSettings();
+applyURLParams();
 </script>
 </body>
 </html>`

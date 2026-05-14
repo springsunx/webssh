@@ -147,12 +147,13 @@ func RemoveKnownHost(hostname string) error {
 
 
 type Config struct {
-	Host       string
-	Port       int
-	Username   string
-	Password   string
-	PrivateKey []byte
-	Passphrase []byte
+	Host         string
+	Port         int
+	Username     string
+	Password     string
+	PrivateKey   []byte
+	Passphrase   []byte
+	TerminalType string // 终端类型，如 xterm-256color
 }
 
 type Session struct {
@@ -218,7 +219,11 @@ func Connect(cfg Config) (*Session, error) {
 		ssh.TTY_OP_OSPEED: 14400,
 	}
 
-	if err := session.RequestPty("xterm-256color", 40, 120, modes); err != nil {
+	terminalType := cfg.TerminalType
+	if terminalType == "" {
+		terminalType = "xterm-256color"
+	}
+	if err := session.RequestPty(terminalType, 40, 120, modes); err != nil {
 		session.Close()
 		client.Close()
 		return nil, fmt.Errorf("failed to request pty: %w", err)
