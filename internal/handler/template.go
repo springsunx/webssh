@@ -467,11 +467,11 @@ const indexHTMLTemplate = `<!DOCTYPE html>
     #term-window .term-popup{width:100%;max-width:100%;height:100%;max-height:100%;
       border-radius:0;border:none;box-shadow:none;animation:none;overflow:visible;}
     #term-window .term-titlebar{display:none;}
-    /* 桌面端弹窗 */
-    .term-popup{width:calc(100vw - 32px);max-width:980px;height:calc(100vh - 60px);max-height:700px;
-      background:#0d1117;border-radius:12px;border:1px solid #1e2d45;overflow:hidden;
-      display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.65);
-      animation:popIn .3s cubic-bezier(.22,1,.36,1) both;}
+    /* 终端弹窗 - 电脑端不限制大小，根据窗口自动调整 */
+    .term-popup{width:100%;max-width:100%;height:100%;max-height:100%;
+      background:#0d1117;border-radius:0;border:none;overflow:hidden;
+      display:flex;flex-direction:column;box-shadow:none;
+      animation:none;}
     @keyframes popIn{from{transform:scale(.93) translateY(20px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
     /* 移动端：全屏终端 */
     @media(max-width:640px){
