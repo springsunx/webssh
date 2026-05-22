@@ -1428,11 +1428,16 @@ function vkbCopy() {
     showToast('⚠ 无可复制内容');
   }
 }
+// Normalize line endings: convert \r\n and \r to \n
+// Prevents bash from executing command when \r triggers continuation then \n triggers execute
+function normalizeLineEndings(text) {
+  return text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+}
 // 虚拟键盘：粘贴
 function vkbPaste() {
   if (navigator.clipboard && navigator.clipboard.readText) {
     navigator.clipboard.readText().then(text => {
-      if (text) sendKey(text);
+      if (text) sendKey(normalizeLineEndings(text));
     }).catch(() => {
       showToast('⚠ 无法读取剪贴板');
     });
@@ -1545,7 +1550,7 @@ function initTerm() {
         if (navigator.clipboard && navigator.clipboard.readText) {
           navigator.clipboard.readText().then(text => {
             if (text && ws && ws.readyState === WebSocket.OPEN) {
-              ws.send(JSON.stringify({type:'input', data: text}));
+              ws.send(JSON.stringify({type:'input', data: normalizeLineEndings(text)}));
               showToast('✓ 已粘贴');
             }
           }).catch(() => {
