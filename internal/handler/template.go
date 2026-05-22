@@ -1221,9 +1221,10 @@ async function saveSettings(partial) {
 }
 function applySettings() {
   const s = settingsCache;
+  try {
   if (s.theme) {
     document.body.setAttribute('data-theme', s.theme);
-    const sw = document.querySelector('.color-swatch[data-theme="'+s.theme+'"]');
+    const sw = document.querySelector('.color-swatch[data-theme="'+CSS.escape(s.theme)+'"]');
     document.querySelectorAll('.color-swatch').forEach(x => x.classList.remove('active'));
     if (sw) sw.classList.add('active');
   }
@@ -1240,7 +1241,7 @@ function applySettings() {
   if (s.term_bg) {
     currentTermBg = s.term_bg;
     document.querySelectorAll('.term-bg-swatch').forEach(x => x.classList.remove('active'));
-    const sw = document.querySelector('.term-bg-swatch[data-bg="'+s.term_bg+'"]');
+    const sw = document.querySelector('.term-bg-swatch[data-bg="'+CSS.escape(s.term_bg)+'"]');
     if (sw) sw.classList.add('active');
   }
   if (s.font_size && s.font_size > 0) {
@@ -1256,13 +1257,18 @@ function applySettings() {
     if (btn) btn.classList.add('active');
   }
   applyI18n();
+  } catch(e) { console.warn('applySettings error:', e); }
 }
 
 // ---- Modals ----
 function openSettings() { document.getElementById('settings-modal').classList.add('open'); }
 function closeSettings() { document.getElementById('settings-modal').classList.remove('open'); }
-document.getElementById('settings-modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeSettings(); });
-document.getElementById('ssh-list-modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeSSHList(); });
+(function(){
+  var sm = document.getElementById('settings-modal');
+  if (sm) sm.addEventListener('click', function(e) { if(e.target===e.currentTarget) closeSettings(); });
+  var sl = document.getElementById('ssh-list-modal');
+  if (sl) sl.addEventListener('click', function(e) { if(e.target===e.currentTarget) closeSSHList(); });
+})();
 
 // ---- Auth Tabs ----
 let currentTab = 'password', privateKeyData = '';
