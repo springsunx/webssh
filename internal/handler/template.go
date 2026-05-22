@@ -1261,13 +1261,35 @@ function applySettings() {
 }
 
 // ---- Modals ----
-function openSettings() { document.getElementById('settings-modal').classList.add('open'); }
-function closeSettings() { document.getElementById('settings-modal').classList.remove('open'); }
+function openSettings() {
+  var el = document.getElementById('settings-modal');
+  if (el) {
+    el.classList.add('open');
+    // 内联样式兜底，防止 CSS 优先级问题
+    el.style.opacity = '1';
+    el.style.pointerEvents = 'all';
+  }
+}
+function closeSettings() {
+  var el = document.getElementById('settings-modal');
+  if (el) {
+    el.classList.remove('open');
+    el.style.opacity = '';
+    el.style.pointerEvents = '';
+  }
+}
 (function(){
   var sm = document.getElementById('settings-modal');
   if (sm) sm.addEventListener('click', function(e) { if(e.target===e.currentTarget) closeSettings(); });
   var sl = document.getElementById('ssh-list-modal');
   if (sl) sl.addEventListener('click', function(e) { if(e.target===e.currentTarget) closeSSHList(); });
+  // 给设置按钮添加 JS 事件监听作为 onclick 的备份
+  var btns = document.querySelectorAll('.btn-icon.spin');
+  btns.forEach(function(btn) {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').indexOf('openSettings') >= 0) {
+      btn.addEventListener('click', function(e) { openSettings(); });
+    }
+  });
 })();
 
 // ---- Auth Tabs ----
